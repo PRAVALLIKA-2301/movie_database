@@ -1,27 +1,23 @@
 import "./Navbar.css";
 import search_png from "../assets/search.png";
-import { useEffect } from "react";
+import { useState } from "react";
+import { fetchMovies } from "../services/api";
 const Navbar = () => {
-  const url = `https://imdb8.p.rapidapi.com/auto-complete?q=titanic`;
-  const options = {
-    method: "GET",
-    headers: {
-      "x-rapidapi-key": "275ea49978mshb3ce54e8a8131e1p179052jsn17e54dbfbb13",
-      "x-rapidapi-host": "imdb8.p.rapidapi.com",
-    },
-  };
+  const [query, setQuery] = useState([""]);
+  const [movies, setMovies] = useState([]);
+
   const search = async () => {
+    if (query === "") {
+      alert("Please Enter the Movie Name");
+      return;
+    }
     try {
-      const response = await fetch(url, options);
-      const result = await response.json();
-      console.log(result);
-    } catch (error) {
-      console.error(error);
+      const results = await fetchMovies(query);
+      setMovies(results);
+    } catch (err) {
+      console.log("Error fetching movies", err);
     }
   };
-  useEffect(() => {
-    search("titanic");
-  }, []);
 
   return (
     <header className="header">
@@ -30,16 +26,35 @@ const Navbar = () => {
       </a>
       <nav className="navbar">
         <a href="/"> HOME</a>
-        <a href="/">MOST POPULAR</a>
+        <a href="/"> POPULAR </a>
         <a href="/">NEW</a>
 
-        <a href="/">ABOUT</a>
+        <a href="/">HIGH RATED</a>
 
         <div className="searchbar">
-          <input type="text" placeholder="search movie  " />
-          <img src={search_png} alt="search icon" />
+          <input
+            type="text"
+            placeholder="search movie name "
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <img
+            src={search_png}
+            alt="search icon"
+            onClick={() => {
+              search;
+            }}
+          />
         </div>
       </nav>
+      <div className="search -results">
+        {movies.map((movie) => (
+          <div key={movie.id} className="movie-card">
+            {<img src={movie.i.imageUrl} alt={movie.l} />}
+            <h4>{movie.l}</h4>
+          </div>
+        ))}
+      </div>
     </header>
   );
 };
