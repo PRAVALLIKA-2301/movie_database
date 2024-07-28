@@ -1,0 +1,38 @@
+.movieContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/Bodybg.png");
+  background-size: cover;
+}
+.loading {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/Bodybg.png");
+  background-size: cover;
+}
+
+.movie-card {
+  margin-right: 20px;
+  width: 200px;
+  /* background-color: black; */
+}
+
+.poster {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+}
+.search-results {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  /* margin: auto;
+  align-items: center; */
+}
+h4 {
+  color: azure;
+}
+h5 {
+  color: azure;
+}

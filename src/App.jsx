@@ -1,9 +1,9 @@
-import Navbar from "../src/Components/Navbar";
+import RootNavigation from "./RootNavigation/RootNavigation";
 
 const App = () => {
   return (
     <div>
-      <Navbar />
+      <RootNavigation />
     </div>
   );
 };

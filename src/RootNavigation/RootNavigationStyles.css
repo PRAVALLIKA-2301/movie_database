@@ -1,0 +1,27 @@
+.container {
+  /* position: fixed; */
+  display: flex;
+  height: 100%;
+  width: 100%;
+  /* background-color: #181818; */
+  background-image: url("../assets/Bodybg.png");
+  background-size: cover;
+}
+.navbar-p {
+  position: fixed;
+  height: 15%;
+  width: 100%;
+  /* background-color: grey; */
+  /* opacity: 1; */
+  background-image: url("../assets/Headerbg.png");
+  background-size: cover;
+  background-color: #080806;
+}
+.moviepreview-p {
+  padding-top: 8%;
+  height: 100%;
+  width: 100%;
+  background-attachment: fixed;
+  background-image: url("../assets/Bodybg.png");
+  background-size: cover;
+}

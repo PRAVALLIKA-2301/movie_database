@@ -1,22 +1,49 @@
 import "./Navbar.css";
 import search_png from "../assets/search.png";
 import { useState } from "react";
-import { fetchMovies } from "../services/api";
-const Navbar = () => {
-  const [query, setQuery] = useState([""]);
-  const [movies, setMovies] = useState([]);
+import { fetchMovies, fetchPopularMovies } from "../services/api";
+import ScreenType from "../enums";
+const Navbar = ({ movieCallBack, activeScreenCallback }) => {
+  const [query, setQuery] = useState("");
+
+  const resetData = () => {
+    let model = {
+      data: [],
+    };
+    movieCallBack(model);
+  };
 
   const search = async () => {
-    if (query === "") {
-      alert("Please Enter the Movie Name");
-      return;
-    }
+    resetData();
+    activeScreenCallback(ScreenType.SEARCH);
     try {
       const results = await fetchMovies(query);
-      setMovies(results);
+      constructCallBack(results);
     } catch (err) {
       console.log("Error fetching movies", err);
     }
+  };
+  const constructCallBack = (response) => {
+    let model = {
+      data: response,
+    };
+    movieCallBack(model);
+  };
+
+  const getPopularMovies = async () => {
+    resetData();
+    activeScreenCallback(ScreenType.POPULAR);
+
+    try {
+      const results = await fetchPopularMovies();
+      constructCallBack(results);
+    } catch (err) {
+      console.log("Error fetching Popular movies", err);
+    }
+  };
+
+  const onPressHome = () => {
+    activeScreenCallback(ScreenType.HOME);
   };
 
   return (
@@ -25,36 +52,25 @@ const Navbar = () => {
         movie hunter
       </a>
       <nav className="navbar">
-        <a href="/"> HOME</a>
-        <a href="/"> POPULAR </a>
+        <a href="#" onClick={onPressHome}>
+          Home
+        </a>
+        <a href="#" onClick={getPopularMovies}>
+          POPULAR
+        </a>
         <a href="/">NEW</a>
-
         <a href="/">HIGH RATED</a>
 
         <div className="searchbar">
           <input
             type="text"
-            placeholder="search movie name "
+            placeholder="search movie "
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <img
-            src={search_png}
-            alt="search icon"
-            onClick={() => {
-              search;
-            }}
-          />
+          <img src={search_png} alt="search icon" onClick={search} />
         </div>
       </nav>
-      <div className="search -results">
-        {movies.map((movie) => (
-          <div key={movie.id} className="movie-card">
-            {<img src={movie.i.imageUrl} alt={movie.l} />}
-            <h4>{movie.l}</h4>
-          </div>
-        ))}
-      </div>
     </header>
   );
 };
