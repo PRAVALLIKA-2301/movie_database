@@ -30,7 +30,7 @@ const RootNavigation = () => {
         ) : (
           <MoviePreview
             movieData={finalMovieData}
-            isPopular={currentActiveScreen == ScreenType.POPULAR}
+            currentActiveScreen={currentActiveScreen}
           />
         )}
       </div>
