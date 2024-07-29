@@ -10,7 +10,7 @@
   z-index: 100;
 }
 .logo {
-  font-size: 30px;
+  font-size: 35px;
   color: azure;
   font-weight: 700;
 }
@@ -23,7 +23,7 @@
 .navbar-text a {
   color: azure;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .navbar-searchbar {
   display: flex;
