@@ -4,11 +4,10 @@ export const fetchMovies = async (query) => {
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": "275ea49978mshb3ce54e8a8131e1p179052jsn17e54dbfbb13",
+      "x-rapidapi-key": "212cbbe3d3msh2899cd49ac03560p1bb403jsne067704c2fc2",
       "x-rapidapi-host": "imdb8.p.rapidapi.com",
     },
   };
-
   try {
     const response = await fetch(url, options);
     const result = await response.json();
@@ -21,14 +20,14 @@ export const fetchMovies = async (query) => {
 export const fetchPopularMovies = async () => {
   const options = {
     method: "GET",
-    url: "https://imdb8.p.rapidapi.com/title/v2/get-popular",
+    url: `https://imdb8.p.rapidapi.com/title/v2/get-popular`,
     params: {
       first: "20",
       country: "US",
       language: "en-US",
     },
     headers: {
-      "x-rapidapi-key": "275ea49978mshb3ce54e8a8131e1p179052jsn17e54dbfbb13",
+      "x-rapidapi-key": "212cbbe3d3msh2899cd49ac03560p1bb403jsne067704c2fc2",
       "x-rapidapi-host": "imdb8.p.rapidapi.com",
     },
   };
@@ -44,18 +43,17 @@ export const fetchPopularMovies = async () => {
 export const getOverview = async (movieId) => {
   const options = {
     method: "GET",
-    url: `https://imdb8.p.rapidapi.com/title/v2/get-overview`,
+    url: "https://imdb8.p.rapidapi.com/title/v2/get-overview",
     params: {
       tconst: movieId,
       country: "US",
       language: "en-US",
     },
     headers: {
-      "x-rapidapi-key": "275ea49978mshb3ce54e8a8131e1p179052jsn17e54dbfbb13",
+      "x-rapidapi-key": "212cbbe3d3msh2899cd49ac03560p1bb403jsne067704c2fc2",
       "x-rapidapi-host": "imdb8.p.rapidapi.com",
     },
   };
-
   try {
     const response = await axios.request(options);
     console.log("overview", movieId, response.data);
@@ -64,27 +62,22 @@ export const getOverview = async (movieId) => {
     console.error(error);
   }
 };
-export const getComingSoonList = async () => {
+export const getTvShowsList = async () => {
   const options = {
     method: "GET",
-    url: "https://imdb8.p.rapidapi.com/title/v2/get-coming-soon",
+    url: "https://imdb8.p.rapidapi.com/title/get-coming-soon-tv-shows",
     params: {
-      comingSoonType: "MOVIE",
-      first: "20",
-      country: "US",
-      language: "en-US",
+      currentCountry: "US",
     },
     headers: {
-      "x-rapidapi-key": "275ea49978mshb3ce54e8a8131e1p179052jsn17e54dbfbb13",
+      "x-rapidapi-key": "212cbbe3d3msh2899cd49ac03560p1bb403jsne067704c2fc2",
       "x-rapidapi-host": "imdb8.p.rapidapi.com",
     },
   };
 
   try {
     const response = await axios.request(options);
-    console.log("comingsoon", response.data);
-    let apiData = response?.data?.data?.comingSoon?.edges;
-    return apiData;
+    console.log(response.data);
   } catch (error) {
     console.error(error);
   }

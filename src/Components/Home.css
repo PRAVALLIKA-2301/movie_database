@@ -1,9 +1,40 @@
 .home-container {
   position: fixed;
   display: flex;
-  background-color: aqua;
+  margin: auto;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   background-image: url("../assets/Bodybg.png");
   background-size: cover;
+  color: white;
+  padding-left: 5vw;
+}
+.home-text {
+  font-size: 30px;
+  margin-top: 10%;
+}
+.home-searchbar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  padding: 5px;
+  width: 50%;
+  background-color: #fff;
+  margin-top: 1%;
+}
+.home-searchbar input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 3px;
+  font-size: 14px;
+
+  /* font-weight: 450; */
+}
+.home-searchbar img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }

@@ -14,18 +14,18 @@
   color: azure;
   font-weight: 700;
 }
-.navbar {
+.navbar-text {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 28px;
 }
-.navbar a {
+.navbar-text a {
   color: azure;
   font-size: 18px;
   font-weight: 500;
 }
-.searchbar {
+.navbar-searchbar {
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
@@ -34,7 +34,7 @@
   /* width: 280px; */
   background-color: #fff;
 }
-.searchbar input {
+.navbar-searchbar input {
   border: none;
   outline: none;
   flex: 1;
@@ -43,7 +43,7 @@
 
   /* font-weight: 450; */
 }
-.searchbar img {
+.navbar-searchbar img {
   width: 20px;
   height: 20px;
   cursor: pointer;

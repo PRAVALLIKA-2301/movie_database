@@ -2,6 +2,6 @@ enum ScreenType {
   HOME = "HOME",
   POPULAR = "POPULAR",
   SEARCH = "SEARCH",
-  COMINGSOON = "COMINGSOON",
+  TVSHOWS = "TVSHOWS",
 }
 export default ScreenType;

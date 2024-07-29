@@ -15,18 +15,24 @@ const RootNavigation = () => {
     <div className="container">
       <div className="navbar-p">
         <Navbar
-          activeScreenCallback={(currentActive) => {
-            setCurrentActiveScreen(currentActive);
-          }}
           movieCallBack={(response) => {
-            console.log("movieCallBack", response);
-            setFinalMovieData(response?.data);
+            setCurrentActiveScreen(response?.type);
+            setTimeout(() => {
+              setFinalMovieData(response?.data);
+            }, 1000);
           }}
         />
       </div>
       <div className="moviepreview-p">
         {currentActiveScreen == ScreenType.HOME ? (
-          <Home />
+          <Home
+            searchCallback={(response) => {
+              setCurrentActiveScreen(response?.type);
+              setTimeout(() => {
+                setFinalMovieData(response?.data);
+              }, 1000);
+            }}
+          />
         ) : (
           <MoviePreview
             movieData={finalMovieData}

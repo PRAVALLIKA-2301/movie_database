@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MoviePreview.css";
 import ScreenType from "../enums";
-import { getOverview } from "../services/api";
+// import { getOverview } from "../services/api";
 
 const MoviePreview = ({ movieData, currentActiveScreen }) => {
   const [movieList, setMovieList] = useState(movieData);
@@ -20,13 +20,13 @@ const MoviePreview = ({ movieData, currentActiveScreen }) => {
   }, [currentActiveScreen]);
 
   const renderEachComingSoonItem = async (item) => {
-    let itemData = await getOverview(item?.node?.id);
-    return (
-      <div key={movie?.node?.id} className="movie-card">
-        {itemData}
-        {/* <img src={movie?.node?.primaryImage?.url} className="poster" /> */}
-      </div>
-    );
+    // let itemData = await getOverview(item?.node?.id);
+    // return (
+    //   <div key={movie?.node?.id} className="movie-card">
+    //     {itemData}
+    //     {/* <img src={movie?.node?.primaryImage?.url} className="poster" /> */}
+    //   </div>
+    // );
   };
 
   const renderFinalComponent = () => {
@@ -37,6 +37,13 @@ const MoviePreview = ({ movieData, currentActiveScreen }) => {
             {movieList?.map((movie) => (
               <div key={movie?.id} className="movie-card">
                 <img src={movie?.node?.primaryImage?.url} className="poster" />
+                <h4> Name: {movie?.node?.titleText?.text}</h4>
+
+                <h4>Released Year: {movie?.node?.releaseYear?.year}</h4>
+                <h4>
+                  Genre: {movie?.node?.titleGenres?.genres[0]?.genre?.text},
+                  {movie?.node?.titleGenres?.genres[1]?.genre?.text}
+                </h4>
               </div>
             ))}
           </div>
@@ -61,7 +68,7 @@ const MoviePreview = ({ movieData, currentActiveScreen }) => {
                       <h4>Name - {movie.l}</h4>
 
                       {movie.s && <h5>Main Cast - {movie.s}</h5>}
-                      <h5>Release Year- {movie.y}</h5>
+                      {movie.y && <h5>Release Year- {movie.y}</h5>}
                     </div>
                   )}
                 </div>
@@ -69,7 +76,7 @@ const MoviePreview = ({ movieData, currentActiveScreen }) => {
             </div>
           )
         );
-      case ScreenType.COMINGSOON:
+      case ScreenType.TVSHOWS:
         return (
           <div className="search-results">
             {movieList?.map((movie) => renderEachComingSoonItem(movie))}
@@ -86,7 +93,7 @@ const MoviePreview = ({ movieData, currentActiveScreen }) => {
         renderFinalComponent()
       ) : (
         <div className="loading">
-          <h2>Loading......</h2>
+          <h1>Loading......</h1>
         </div>
       )}
     </div>

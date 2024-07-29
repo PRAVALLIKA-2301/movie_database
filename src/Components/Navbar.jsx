@@ -4,10 +4,10 @@ import { useState } from "react";
 import {
   fetchMovies,
   fetchPopularMovies,
-  getComingSoonList,
+  getTvShowsList,
 } from "../services/api";
 import ScreenType from "../enums";
-const Navbar = ({ movieCallBack, activeScreenCallback }) => {
+const Navbar = ({ movieCallBack }) => {
   const [query, setQuery] = useState("");
 
   const resetData = () => {
@@ -19,43 +19,40 @@ const Navbar = ({ movieCallBack, activeScreenCallback }) => {
 
   const search = async () => {
     resetData();
-    activeScreenCallback(ScreenType.SEARCH);
     try {
       const results = await fetchMovies(query);
-      constructCallBack(results);
+      constructCallBack(results, ScreenType.SEARCH);
     } catch (err) {
       console.log("Error fetching movies", err);
     }
   };
-  const constructCallBack = (response) => {
+  const constructCallBack = (response, screenType) => {
     let model = {
       data: response,
+      type: screenType,
     };
     movieCallBack(model);
   };
 
   const getPopularMovies = async () => {
     resetData();
-    activeScreenCallback(ScreenType.POPULAR);
-
     try {
       const results = await fetchPopularMovies();
-      constructCallBack(results);
+      constructCallBack(results, ScreenType.POPULAR);
     } catch (err) {
       console.log("Error fetching Popular movies", err);
     }
   };
 
   const onPressHome = () => {
-    activeScreenCallback(ScreenType.HOME);
+    constructCallBack([], ScreenType.HOME);
   };
-  const onPressComingSoon = async () => {
+  const onPressTvShows = async () => {
     resetData();
-    activeScreenCallback(ScreenType.COMINGSOON);
 
     try {
-      const results = await getComingSoonList();
-      constructCallBack(results);
+      const results = await getTvShowsList();
+      constructCallBack(results, ScreenType.TVSHOWS);
     } catch (err) {
       console.log("Error fetching coming soon movies", err);
     }
@@ -66,19 +63,18 @@ const Navbar = ({ movieCallBack, activeScreenCallback }) => {
       <a href="/" className="logo">
         movie hunter
       </a>
-      <nav className="navbar">
+      <nav className="navbar-text">
         <a href="#" onClick={onPressHome}>
-          Home
+          HOME
         </a>
         <a href="#" onClick={getPopularMovies}>
           POPULAR
         </a>
-        <a href="#" onClick={onPressComingSoon}>
-          COMING SOON
+        <a href="#" onClick={onPressTvShows}>
+          TV SHOWS
         </a>
-        <a href="/">HIGH RATED</a>
 
-        <div className="searchbar">
+        <div className="navbar-searchbar">
           <input
             type="text"
             placeholder="search movie "

@@ -4,7 +4,7 @@
   height: 100%;
   width: 100%;
   /* background-color: #181818; */
-  background-image: url("../assets/Bodybg.png");
+  /* background-image: url("../assets/Bodybg.png"); */
   background-size: cover;
 }
 .navbar-p {
@@ -22,6 +22,7 @@
   height: 100%;
   width: 100%;
   background-attachment: fixed;
-  background-image: url("../assets/Bodybg.png");
+  /* background-image: url("../assets/Bodybg.png"); */
   background-size: cover;
+  background-color: #181818;
 }
