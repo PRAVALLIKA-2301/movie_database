@@ -5,12 +5,18 @@ import ScreenType from "../enums";
 
 const MoviePreview = ({ movieData, currentActiveScreen }) => {
   const [movieList, setMovieList] = useState(movieData);
+  const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
+  const IMAGE_SIZE = "w500";
 
   useEffect(() => {
     console.log("movieData", movieData);
     if (currentActiveScreen == ScreenType.POPULAR) {
       setMovieList(movieData?.data?.data?.movies?.edges);
-    } else {
+    }
+    // if (currentActiveScreen == ScreenType.HIGHRATED){
+    //   setMovieList(movieData.data.)
+    // }
+    else {
       setMovieList(movieData);
     }
   }, [movieData]);
@@ -18,16 +24,6 @@ const MoviePreview = ({ movieData, currentActiveScreen }) => {
   useEffect(() => {
     setMovieList([]);
   }, [currentActiveScreen]);
-
-  const renderEachComingSoonItem = async (item) => {
-    // let itemData = await getOverview(item?.node?.id);
-    // return (
-    //   <div key={movie?.node?.id} className="movie-card">
-    //     {itemData}
-    //     {/* <img src={movie?.node?.primaryImage?.url} className="poster" /> */}
-    //   </div>
-    // );
-  };
 
   const renderFinalComponent = () => {
     switch (currentActiveScreen) {
@@ -76,10 +72,22 @@ const MoviePreview = ({ movieData, currentActiveScreen }) => {
             </div>
           )
         );
-      case ScreenType.TVSHOWS:
+      case ScreenType.HIGHRATED:
         return (
           <div className="search-results">
-            {movieList?.map((movie) => renderEachComingSoonItem(movie))}
+            {movieList?.map((movie) => (
+              <div key={movie?.id} className="movie-card">
+                <img
+                  src={`${IMAGE_BASE_URL}${IMAGE_SIZE}${movie?.poster_path}`}
+                  className="poster"
+                />
+                <h5> Name: {movie?.title}</h5>
+
+                <h5>Released Date: {movie?.release_date}</h5>
+
+                <h6>Overview : {movie?.overview}</h6>
+              </div>
+            ))}
           </div>
         );
       default:

@@ -40,44 +40,30 @@ export const fetchPopularMovies = async () => {
     console.error(error);
   }
 };
-export const getOverview = async (movieId) => {
+
+const ACCESS_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMjdkYzQwMDUwOTkxOWM0NTlkZmEyODMwNTdmZmNkMyIsIm5iZiI6MTcyMjMxNzc3Ny45NTI2MjgsInN1YiI6IjY2YTg3NmExN2ZkODI4OGM5YjVmYjJhOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9PFbZFOYT-NqCOQsH5nIZpNSyfR5BidYm7YskTnQt-4";
+const API_KEY = "b27dc400509919c459dfa283057ffcd3";
+export const getHighRated = async () => {
   const options = {
     method: "GET",
-    url: "https://imdb8.p.rapidapi.com/title/v2/get-overview",
+    url: "https://api.themoviedb.org/3/discover/movie",
     params: {
-      tconst: movieId,
-      country: "US",
-      language: "en-US",
+      api_key: API_KEY,
+      sort_by: "vote_average.desc",
+      "vote_count.gte": "1000",
+      "vote_average.gte": "8.0",
     },
     headers: {
-      "x-rapidapi-key": "212cbbe3d3msh2899cd49ac03560p1bb403jsne067704c2fc2",
-      "x-rapidapi-host": "imdb8.p.rapidapi.com",
-    },
-  };
-  try {
-    const response = await axios.request(options);
-    console.log("overview", movieId, response.data);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-export const getTvShowsList = async () => {
-  const options = {
-    method: "GET",
-    url: "https://imdb8.p.rapidapi.com/title/get-coming-soon-tv-shows",
-    params: {
-      currentCountry: "US",
-    },
-    headers: {
-      "x-rapidapi-key": "212cbbe3d3msh2899cd49ac03560p1bb403jsne067704c2fc2",
-      "x-rapidapi-host": "imdb8.p.rapidapi.com",
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      "Content-Type": "application/json",
     },
   };
 
   try {
     const response = await axios.request(options);
-    console.log(response.data);
+    console.log("response", response);
+    return response.data.results;
   } catch (error) {
     console.error(error);
   }

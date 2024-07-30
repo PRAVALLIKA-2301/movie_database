@@ -1,11 +1,7 @@
 import "./Navbar.css";
 import search_png from "../assets/search.png";
 import { useState } from "react";
-import {
-  fetchMovies,
-  fetchPopularMovies,
-  getTvShowsList,
-} from "../services/api";
+import { fetchMovies, fetchPopularMovies, getHighRated } from "../services/api";
 import ScreenType from "../enums";
 const Navbar = ({ movieCallBack }) => {
   const [query, setQuery] = useState("");
@@ -47,12 +43,12 @@ const Navbar = ({ movieCallBack }) => {
   const onPressHome = () => {
     constructCallBack([], ScreenType.HOME);
   };
-  const onPressTvShows = async () => {
+  const onPressHighRated = async () => {
     resetData();
 
     try {
-      const results = await getTvShowsList();
-      constructCallBack(results, ScreenType.TVSHOWS);
+      const results = await getHighRated();
+      constructCallBack(results, ScreenType.HIGHRATED);
     } catch (err) {
       console.log("Error fetching coming soon movies", err);
     }
@@ -70,8 +66,8 @@ const Navbar = ({ movieCallBack }) => {
         <a href="#" onClick={getPopularMovies}>
           POPULAR
         </a>
-        <a href="#" onClick={onPressTvShows}>
-          TV SHOWS
+        <a href="#" onClick={onPressHighRated}>
+          HIGH RATED
         </a>
 
         <div className="navbar-searchbar">
