@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./MoviePreview.css";
 import ScreenType from "../enums";
+import Lottie from "react-lottie";
 // import { getOverview } from "../services/api";
+import * as loading from "../assets/Loading_animation.json";
+import * as flight from "../assets/flight_animation.json";
 
 const MoviePreview = ({ movieData, currentActiveScreen }) => {
   const [movieList, setMovieList] = useState(movieData);
@@ -12,11 +15,7 @@ const MoviePreview = ({ movieData, currentActiveScreen }) => {
     console.log("movieData", movieData);
     if (currentActiveScreen == ScreenType.POPULAR) {
       setMovieList(movieData?.data?.data?.movies?.edges);
-    }
-    // if (currentActiveScreen == ScreenType.HIGHRATED){
-    //   setMovieList(movieData.data.)
-    // }
-    else {
+    } else {
       setMovieList(movieData);
     }
   }, [movieData]);
@@ -95,13 +94,30 @@ const MoviePreview = ({ movieData, currentActiveScreen }) => {
     }
   };
 
+  const defaultOptions1 = {
+    loop: true,
+    autoplay: true,
+    animationData: loading,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  // const defaultOptions2 = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: flight,
+  //   rendererSettings: {
+  //     preserveAspectRatio: "xMidYMid slice",
+  //   },
+  // };
   return (
     <div className="movieContainer">
       {movieList?.length > 0 ? (
         renderFinalComponent()
       ) : (
         <div className="loading">
-          <h1>Loading......</h1>
+          <Lottie options={defaultOptions1} height={200} width={200} />
+          {/* <Lottie options={defaultOptions2} height={200} width={200} /> */}
         </div>
       )}
     </div>

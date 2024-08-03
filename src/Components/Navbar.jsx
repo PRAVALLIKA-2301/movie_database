@@ -45,7 +45,6 @@ const Navbar = ({ movieCallBack }) => {
   };
   const onPressHighRated = async () => {
     resetData();
-
     try {
       const results = await getHighRated();
       constructCallBack(results, ScreenType.HIGHRATED);

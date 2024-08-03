@@ -49,9 +49,9 @@
   cursor: pointer;
   /* margin-left: 2px; */
 }
-img:hover {
+/* img:hover {
   background-color: red;
-}
+} */
 .navbar a:hover {
   color: grey;
 }
